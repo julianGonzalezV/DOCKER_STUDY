@@ -1,0 +1,49 @@
+What is Docker?:::::::::::.
+Software cintainer platfform
+
+
+image : is a package that contains everything to run an application (piece of software)
+
+
+A container is a runtime instance of an image.
+
+
+
+Better Performance: Due to VM require a Hypervisor to access to the Host resources while a docker container access thats resources natively.
+
+
+Containers vs. virtual machines:::
+
+Performance: Por lo arriba expuesto.
+
+>La VM al tener un Guest OS , todo se torna complicado al momento de portabilidad, replicar, muchas configuraciones fácil de perdersen.
+
+
+Container : Lo único que se necesita es su ejecutable y sus dependencias, cada 
+
+
+
+
+:::::::::::::...Get Started, Part 2: Containers:::::::::::::::::::::::::::::::::
+
+
+Niveles (se lee de abajo hacia arriba)
+
+Stack: Define como interactuan todos los SERVICES
+
+Services: define como los container se comportan en producción.
+
+Container(acá estamos nosotros).
+
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ 
+
+
+
+
+	
+
+
+

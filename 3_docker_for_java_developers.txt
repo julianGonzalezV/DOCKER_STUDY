@@ -1,0 +1,56 @@
+https://www.javacodegeeks.com/2017/08/docker-java-developers-introduction.html
+
+Container-based virtualization is exceptionally lightweight (comparing to traditional virtual machines) No requiere de un hipervisor
+
+Las aplicaciones  run in isolation on a shared operating system
+
+
+What's LXC? https://linuxcontainers.org/lxc/introduction/
+LXC is a userspace interface for the Linux kernel containment features.
+Through a powerful API and simple tools, it lets Linux users easily create
+and manage system or application containers.
+
+
+What's LXD? https://linuxcontainers.org/lxd/introduction/
+LXD is a next generation system container manager.
+It offers a user experience similar to virtual machines but using Linux containers instead.
+
+It's image based with pre-made images available for a wide number of Linux distributions
+and is built around a very powerful, yet pretty simple, REST API.
+
+CGROUPs (grupos de control): Es una caracteristica del Kernel de linux 
+que permite elaislamiento de los recursos del servidor (CPU, memory, disk I/O, network, etc.).
+controla la signación de recursos a los procesos.
+
+
+3. Docker: Containers for Masses:::::::::::::::::::
+Docker está escrito en Go ;    The community edition is downloadable free of charge
+
+3.1. Architecture::::::::::::::::::::
+
+Está el Docker heart, que esta en un daemon process dockerd, >> sucesivamente dockerd se basa en el daemon containerd, éste es la capa de abstaracción a namespaces and cgroups. y se termina con las herramientas de líneas de comandos(like for example docker and docker-compose) conocida como docker CLI.
+
+De las principales razones de escoger Docker es porque corre nativamente en  la mayoría de distribuciones linux. de igual forma y con algunas 
+consideraciones correo en MAC y windows.
+
+3.2. Images ::::::::::::::::::::
+
+Imagen : Set de instrucciones de como construir un contenedor, una imagen puede heredar de otra o basarse en otra y agregarsen caracteristicas
+adicionales.
+
+Cada imagen consta de multiples layers.
+
+Para crear una imagen CREAMOS con un dockerFile: Archivo que contiene los pasos/instrucciones para ensamblar la imagen
+
+Cada imagen se pueden crear desde cero (personalizadas) o basarno en las existentes (que se encuentran en el registry o almacen de imagenes para basarnos)
+
+
+
+
+
+
+
+
+
+
+		

@@ -1,0 +1,41 @@
+Virtualizacion:
+
+Máquina virtual(lo que hemos estado acostumbrados a ver): Una opción de virtualización...pero existen otras:
+-> En una VM la aplicación se ejecuta en un ambiente virtualizado, que a su vez contiene/aloja más aplicaciones
+
+Contenedores(): Otra forma de virtualización, Crean una precepción de un ambiente aislado por cada aplicación 
+->
+
+
+
+Guest OS (Operative System): Is an operative system installed into a vm
+
+Hypervisor (en vm) / MOnitor de VM: Es el pc que aloja varias VM y distribuye todo el HW para cada una
+
+
+
+En un contenedor como Docker NO existe un Hipervisor sino un Docker engine sobre el sistema operativo, el DE contiene las aplicaciones pero OJO 
+MUY IMPORTANTE DETECTAR QUE EL NIVEL DE AISLAMIENTO ES TAL QUE PUEDO DESPLEGAR SOLO ESA APP Y TRASPORTARLA A CUALQUIER PARTE(cualquier ambiente),
+Con muy mínimo impacto.
+
+
+
+
+Docker:
+Docker y sus contenedores pueden compartir bibliotecas de aplicacion, ayudando a que los contenedores presenten una carga más baja.
+
+
+
+>los tiempos de inicio y detención de Docker son MUCHO MENORES QUE LOS DE UNA VM
+
+
+
+:::Portabilidad:::
+Fácil de llevar a otro lado: La nube, otro Sistema dockerizado.
+
+
+
+ Ejecutar aplicaciones en un contenedor  y luego desplegar en cualquier lugar (la nube o en las instalaciones o cualquier distribución de Linux) es una realidad ahora. 
+
+
+
