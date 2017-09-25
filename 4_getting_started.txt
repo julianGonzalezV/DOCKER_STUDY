@@ -1,0 +1,238 @@
+https://www.toptal.com/devops/getting-started-with-docker-simplifying-devops
+
+se ven las diferencias 
+hay un ejemplo :) 
+
+
+
+Instalaci[on : para pruebs e iniciar a conocerlo o para equipos pequenios el CE (community Edition) es suficiente est[a el EE (Enterprise Editiion)
+https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+
+
+Asegurarse que no se tiene algo instalado previamente:
+sudo apt-get remove docker docker-engine docker.io
+
+
+S[olo si se tiene Ubuntu 14.04, ejecute los comandos de la secci[on Recommended extra packages for Trusty 14.04 del link arriba (installation)
+
+
+Hay tres formas de instalar docker, la que seleccionaremos es la "Install using the repository" --Ver las otras en la documentaci'-=[]\/.,m,,.<<>..<><><>
+
+GNU Privacy Guard (GnuPG o GPG) ; es la herramienta para cifrado y firma digital
+
+
+PARA lA NUESTRA ENTONCES EJECUTAR 
+
+1)
+Update the apt package index:
+
+$ sudo apt-get update
+Install packages to allow apt to use a repository over HTTPS:
+
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+
+3 Add Docker’s official GPG key:
+
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+Verify that you now have the key with the fingerprint 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88, by searching for the last 8 characters of the fingerprint.
+
+$ sudo apt-key fingerprint 0EBFCD88
+
+pub   4096R/0EBFCD88 2017-02-22
+      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+uid                  Docker Release (CE deb) <docker@docker.com>
+sub   4096R/F273FCD8 2017-02-22
+
+
+
+4)Use the following command to set up the stable repository. (para más información ver en la web)
+
+To add the edge or test repository, add the word edge or test (or both) after the word stable in the commands below.
+
+EDGE OR TEST son loa repos que no son estables 
+
+amd64:
+
+$ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+
+
+:::::::::::::::DESPUÉS DE LOS PASOS ANTERIORES, ENTONCES AHORA SI INSTALL DOCKER CE!!!:::::::::::::::::::::
+
+
+1  $ sudo apt-get update
+
+2 $ sudo apt-get install docker-ce  ojo si se requiere una versión en epscífico entonces ir a la url que explican el cómo.
+
+3
+
+Verify that Docker CE is installed correctly by running the hello-world image.
+
+$ sudo docker run hello-world
+
+
+
+
+::::::::::::::::::::...CONFIGURACIONES ADICIONALES::::::::::::
+
+https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user
+leer por si se requiere algo 
+
+
+
+
+
+::::::::::::::::::::...GET STARTED
+https://docs.docker.com/get-started/
+
+
+::::::::::::::::::::
+https://docs.docker.com/get-started/part2/
+
+
+Define a container with a Dockerfile
+
+mkdir example1
+cd example1/
+touch Dockerfile (CREAR EL ARCHIVO Dockerfile)
+gedit Dockerfile (EDITARLO)
+
+
+y copiar en el archivo Dockerfile lo siguiente 
+
+-------------------------------
+
+# Use an official Python runtime as a parent image
+FROM python:2.7-slim
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+ADD . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements.txt
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
+# Define environment variable
+ENV NAME World
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+
+----------------------------------
+
+CONFIGURAR LOS ARCHIVOS que se referencian en el Dockerfile 
+touch requirements.txt
+gedit requirements.txt 
+touch app.py
+gedit app.py 
+
+
+::::::::::::::::...Build the app::::::::::::::::::
+SÍ NO EJECUTA EL COMANDO POR PERSMISOS entonces usar sudo, pero sí nos parece tedioso entonces ir a las configuraciones adicionales para Ubunti que están en la página.
+
+
+docker build -t friendlyhello .    (este crea una imagen docker la cual vamos a etiquetar con -t, colocando el nombre que queramos  a dicha imagen)
+
+
+
+
+Por que la imagen no se creó en mi carpeta example1?
+R/ Recordar que las imágenes se crean en el docker registry, que en este caso es el registry de tu máquina local, correr el comando:
+ docker images
+
+en mi caso sale
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+friendlyhello       latest              5fe318915032        About a minute ago   195MB
+python              2.7-slim            8b88f06b72d7        5 days ago           184MB
+hello-world         latest              05a3bd381fc2        11 days ago          1.84kB
+
+
+::::::::::::::::::..Run the app::::::::::::::::::::::::::::::
+Antes recordar que el puerto 80 es la del CONTENEDOR, y que se especificó en el DOCKERFILE.
+
+docker run -p 4000:80 friendlyhello
+
+curl http://localhost:4000
+
+
+RUN IN background, in detached mode:
+
+docker run -d -p 4000:80 friendlyhello
+
+
+Cuando se inicie en background y se desee parar el contenedor (la instancia corriendo en él) entonces se hace es con el ID del repositorio
+sudo docker stop 9b0fabe81c1f
+
+
+
+
+::::::::::::::::.Share your image::::::::::::::::::::::::::
+
+Un registry es una colección de repositorios y un repositorio es una colección de imágenes. Con una cuenta en un registri es posible crear varios repositorios.
+
+Docker CLI usa Docker’s public  por defecto como Registry, PERO HAY MÁS, INVESTIGAR DE ELLO SI SE REQUIERE (creo que están Docker Hub ,  Docker Cloud y Docker Store)
+
+Pero para el ejemplo vamos a usar Docker public
+
+1) Crear la cuenta https://cloud.docker.com/
+
+ID = jagv
+pwd = dockerjulian123
+
+ejecutar comando $ docker login
+
+Crear el repo, notación docker tag image username/repository:tag
+
+ejemplo:
+
+docker tag friendlyhello jagv/iniciandome:primera-imagen
+
+
+:::::::::::::::::::::::::::::Publish the image.::::::::::::::::::
+ Subirla al repo remoto, notación 
+docker push username/repository:tag
+ejemplo:
+sudo docker push jagv/iniciandome:primera-imagen
+
+:::::::::::::::::PULL::::::::::::::::::::::
+El siguiente comando se puede ejecutar desde cualquier equipo que cuente con comandos docker, de no encontrarse la imagen en el local, docker procede a descargarlo.
+docker run -p 4000:80 username/repository:tag
+Ejemplo:
+docker run -p 4000:80 jagv/iniciandome:primera-imagen
+
+Sí deseamos validar que realmente le hace pull entonces elimine la imagen existente:
+docker image rm <image id>
+
+resumen de comandos:
+docker build -t friendlyname .  # Create image using this directory's Dockerfile
+docker run -p 4000:80 friendlyname  # Run "friendlyname" mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyname         # Same thing, but in detached mode
+docker container ls                                # List all running containers
+docker container ls -a             # List all containers, even those not running
+docker container stop <hash>           # Gracefully stop the specified container
+docker container kill <hash>         # Force shutdown of the specified container
+docker container rm <hash>        # Remove specified container from this machine
+docker container rm $(docker container ls -a -q)         # Remove all containers
+docker image ls -a                             # List all images on this machine
+docker image rm <image id>            # Remove specified image from this machine
+docker image rm $(docker image ls -a -q)   # Remove all images from this machine
+docker login             # Log in this CLI session using your Docker credentials
+docker tag <image> username/repository:tag  # Tag <image> for upload to registry
+docker push username/repository:tag            # Upload tagged image to registry
+docker run username/repository:tag                   # Run image from a registry
+
+
+

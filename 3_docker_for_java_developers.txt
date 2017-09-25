@@ -1,5 +1,7 @@
 https://www.javacodegeeks.com/2017/08/docker-java-developers-introduction.html
 
+	QUE ES DOCKER: It is a container engine (motor de contenedores)
+
 Container-based virtualization is exceptionally lightweight (comparing to traditional virtual machines) No requiere de un hipervisor
 
 Las aplicaciones  run in isolation on a shared operating system
@@ -19,7 +21,7 @@ It's image based with pre-made images available for a wide number of Linux distr
 and is built around a very powerful, yet pretty simple, REST API.
 
 CGROUPs (grupos de control): Es una caracteristica del Kernel de linux 
-que permite elaislamiento de los recursos del servidor (CPU, memory, disk I/O, network, etc.).
+que permite el aislamiento de los recursos del servidor (CPU, memory, disk I/O, network, etc.).
 controla la signación de recursos a los procesos.
 
 
@@ -28,10 +30,10 @@ Docker está escrito en Go ;    The community edition is downloadable free of ch
 
 3.1. Architecture::::::::::::::::::::
 
-Está el Docker heart, que esta en un daemon process dockerd, >> sucesivamente dockerd se basa en el daemon containerd, éste es la capa de abstaracción a namespaces and cgroups. y se termina con las herramientas de líneas de comandos(like for example docker and docker-compose) conocida como docker CLI.
+Está el Docker heart, que esta en un daemon process dockerd, >> sucesivamente dockerd se basa en el daemon containerd, éste es la capa de abstracción a namespaces and cgroups. y se termina con las herramientas de líneas de comandos(like for example docker and docker-compose) conocida como docker CLI.
 
 De las principales razones de escoger Docker es porque corre nativamente en  la mayoría de distribuciones linux. de igual forma y con algunas 
-consideraciones correo en MAC y windows.
+consideraciones corre en MAC y windows.
 
 3.2. Images ::::::::::::::::::::
 
@@ -45,10 +47,42 @@ Para crear una imagen CREAMOS con un dockerFile: Archivo que contiene los pasos/
 Cada imagen se pueden crear desde cero (personalizadas) o basarno en las existentes (que se encuentran en el registry o almacen de imagenes para basarnos)
 
 
+3.3. Containers :::::::::::::::::::::::::::::
+Cuando se tiene una imagen lista, entonces para darle vida entran los containers, son las instancias ejecutables de IMAGENES 
+dOCKER SE BASA EN LOS SIGUIENTES dos herramientas:
+LIBCONTAINER:  Libcontainer provides a native Go implementation for creating containers with namespaces, cgroups, capabilities, and filesystem access control
+RUNC: runc is a CLI tool for spawning and running containers according to the OCI specification.
+
+
+3.4. Registries:::::::::::::::::::::::::::::::
+
+Es donde se guardan todas las imagenes para que sean base de otras cuando se reuquiera, los m[as conocidos son Docker Hub and Docker Cloud 
+
+tambien es oficial (para cuando escrib[i esto) el  Docker Store, 
+
+
+3.5. Image is the new RPM (rpm package manager, es la forma de tener empaquetados los programas)::::::::::::::::::::::::::::::::::::::
+
+Se le dice que "is the new RPM" porque se puede correr una imagen  en cualquier plataforma, en donde el container engine sea soportado
+
+4. Moby: The Future of Docker::::::::::::::::::: https://blog.docker.com/2017/04/introducing-the-moby-project/
+
+
+5. Towards Interoperability :::::::::::::::::::::::::::::::::::
+
+Open Container Initiative (or just OCI): Le apunta a la interopreatividad entre motores de contenedores
+
+OCI Runtime and Image specifications. Digamos que son como las expecificaciones para que exista ineroperatividad entro Container Engines.
+
+
+6. Docker and Java :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+No hay problema, oracle dijo que NO existen problemas de licenciamientos de java con Docker, incluso publicaron la imagen oficial de  JAVA 8 SE en DOCKER-STORE 
 
 
 
 
+
+8. What’s next ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
