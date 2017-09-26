@@ -234,5 +234,75 @@ docker tag <image> username/repository:tag  # Tag <image> for upload to registry
 docker push username/repository:tag            # Upload tagged image to registry
 docker run username/repository:tag                   # Run image from a registry
 
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+https://docs.docker.com/get-started/part3/
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+1) Instalar dockerf compose:
+Overview of Docker Compose  : https://docs.docker.com/compose/overview/
+
+Compose es una herramienta para definir y correr aplicaciones Docker MULTI CONTENEDORES
+
+
+Instalación (linux, windows, mac os): https://docs.docker.com/compose/install/
+
+1-Ejecutar    sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+2-  Aplicar los permisos de ejecución al binario del punto 1
+	sudo chmod +x /usr/local/bin/docker-compose
+
+3-  Completado de comandos (parece que ya viene en linux por defecto, ver para los otros SO)
+
+4- Probar la instalación.
+	docker-compose --version
+
+
+scale our application and enable load-balancing
+
+NIVEL DE JERARQUÍA DE UNA APLICACIÓN DISTRIBUIDA (el manual lo orienta de abajo hacia arriba):
+Stack
+Services (you are here)
+Container (covered in part 2)
+
+De abajo hacia arriba entonces ....About services:
+
+Una aplicacion distribuida puede estar compuesta por muchos servicio, uno para almacenar información, otro para solo consulta etc 
+En  docker los Servicios son realmente CONTENEDORES EN PRODUCCIÓN,en donde solo se corre una imagen y además codifica la forma en que corre, el puerto en que se despliega, cuantas replicas 
+darlle los recursos que el servicio necesita.
+
+:::::::::::::::::::::::::Your first docker-compose.yml file::::::::::::::::::::::::::::::::::::::
+
+un archivo docker-compose.yml  define el comportamieto de los contenedores en producción.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 
