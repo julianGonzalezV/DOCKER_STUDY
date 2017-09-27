@@ -273,11 +273,68 @@ darlle los recursos que el servicio necesita.
 
 un archivo docker-compose.yml  define el comportamieto de los contenedores en producción.
 
+Explicación de lo que hace el archivo:
+Pull the image we uploaded in step 2 from the registry.
+
+Run 5 instances of that image as a service called web, limiting each one to use, at most, 10% of the CPU (across all cores), and 50MB of RAM.
+
+Immediately restart containers if one fails.
+
+Map port 80 on the host to web’s port 80.
+
+Instruct web’s containers to share port 80 via a load-balanced network called webnet. (Internally, the containers themselves will publish to web’s port 80 at an ephemeral port.)
+
+Define the webnet network with the default settings (which is a load-balanced overlay network).
+
+
+> El nombramiento del archivo no necesariamente tiene que ser docker-compose.yml
+> Lo de version: "3" es para compatibilidad con Docker Swarm
+
+
+FALTA POR EJECUTAR en casa:
+::::::::::::::::::Run your new load-balanced app:::::::::::::::::::::::::
+1) docker swarm init
+2) docker stack deploy -c docker-compose.yml getstartedlab    (getstartedlab ES EL nombre de la aplicación).
+
+Listo entonces de acuerdo al archivo docker-compose.yml, ya tenemos 5 instancias corriendo del mismo servicio 
+
+Cómo verificar la creación de instancias?
+
+$ docker service ls  (para ver los serviciios creados)
+$ docker service ps <service>  (para ver esepcificamente uno)
+
+Let’s inspect one of these tasks, and limit the output to container ID:
+
+$docker inspect --format='{{.Status.ContainerStatus.ContainerID}}' <task>
+
+Lo anterior es como para inspeccionar las tareas de un contenedor 
+
+AHORA para inspeccionar el contenedor como tal:
+
+1) $ docker container ls
+2) $ docker inspect --format="{{index .Config.Labels \"com.docker.swarm.task.id\"}}" <container>
+
+
+listar todos los contenedores
+$ docker container ls -q
+
+Para verificar que si se encuentra dentro de un balanceo de carga entonces podemos correr en una sola línea
+$ curl http://localhost
+O darle manualmente desde el browser a la url y se notará que el ID , HASTA ACÁ un container se puede tomar 30 segundos
+pero es por un problema con la dependencia REDIS 
 
 
 
 
+Scale the app:::::::::::::::::::::
 
+1) docker stack deploy -c docker-compose.yml getstartedlab   (Obvio antes se debió modificar las replicas del archivo docker-compose.yml)
+2) docker container ls -q  (Para verificar que el cambi oquedó)
+
+Take the app down::::::::::::::::::BAJAR LA APLICACIÓN
+
+1) $ docker stack rm getstartedlab
+2) $ docker swarm leave --force  (DEBIDO A qu)
 
 
 
