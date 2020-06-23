@@ -42,7 +42,7 @@ ARG AGENDA_URL
 ARG POLIZA_DIG_PATH
 ARG POLIZA_DIG_URL
 	
-ENV MONGODBURI='mongodb://A7SO6S68E4ISEL:Su.r4.3n.l1.n3.4.06.27.20.14o@cluster0-shard-00-01-pcnre.mongodb.net:27017,cluster0-shard-00-00-pcnre.mongodb.net:27017,cluster0-shard-00-02-pcnre.mongodb.net:27017/test?ssl=true&nbChannelsPerNode=1&keepAlive=false&authSource=admin'\
+ENV MONGODBURI='mongodb://user:pwd@cluster0-shard-00-01-pcnre.mongodb.net:27017,cluster0-shard-00-00-pcnre.mongodb.net:27017,cluster0-shard-00-02-pcnre.mongodb.net:27017/test?ssl=true&nbChannelsPerNode=1&keepAlive=false&authSource=admin'\
 	MONGODBNAME=${MONGODBNAME} \
 	AUTORIZACIONES_PATH=${AUTORIZACIONES_PATH} \
 	AUTORIZACIONES_URL=${AUTORIZACIONES_URL} \
