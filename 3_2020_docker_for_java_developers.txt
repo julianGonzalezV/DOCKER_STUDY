@@ -1,0 +1,72 @@
+Retomando Docker en 2020 para configuración de proyecto real ..salud y quizá arrendamiento
+
+Fuente
+https://github.com/docker/labs/tree/master/developer-tools/java/
+
+run main in example1
+comandos ejecutados:
+docker image build -t java-example1:latest .
+
+Con ARGS como argumentos de entrada 
+docker image build -t java-example1:latest . --build-arg MONGODBURI=mongodb://A7SO6S68E4ISEL:Su.r4.3n.l1.n3.4.06.27.20.14o@cluster0-shard-00-01-pcnre.mongodb.net:27017,cluster0-shard-00-00-pcnre.mongodb.net:27017,cluster0-shard-00-02-pcnre.mongodb.net:27017/test?ssl=true\&nbChannelsPerNode=1\&keepAlive=false\&authSource=admin --build-arg AUTORIZACIONES_PATH=/RestPAS/restApi/autorizaciones/nonsecure/digital/atencion --build-arg TIPO_DOCS_PATH=/RestPAS/restApi/autorizaciones/nonsecure/digital/atencion/documentos --build-arg TIPO_DOCS_URL=https://segdllo02.suranet.com --build-arg AUTORIZACIONES_URL=http://segdllo02.suranet.com/RestPAS/restApi/autorizaciones/nonsecure/digital/atencion --build-arg AGENDA_PATH=/agenda/services;POLIZA_DIG_URL=http://segdllo02.suranet.com/RestPAS/restApi/salud/derechos/nonsecure --build-arg POLIZA_DIG_PATH=/RestPAS/restApi/salud/derechos/nonsecure --build-arg AGENDA_URL=http://epsarpdllo01.suramericana.com/agenda/services --build-arg MONGODBNAME=SuraEnLineaDllo
+docke --build-arg AUTORIZACIONES_PATH=/RestPAS/restApi/autorizaciones/nonsecure/digital/atencion --build-arg TIPO_DOCS_PATH=/RestPAS/restApi/autorizaciones/nonsecure/digital/atencion/documentos --build-arg TIPO_DOCS_URL=https://segdllo02.suranet.com --build-arg AUTORIZACIONES_URL=http://segdllo02.suranet.com/RestPAS/restApi/autorizaciones/nonsecure/digital/atencion --build-arg AGENDA_PATH=/agenda/services --build-arg POLIZA_DIG_URL=http://segdllo02.suranet.com/RestPAS/restApi/salud/derechos/nonsecure --build-arg POLIZA_DIG_PATH=/RestPAS/restApi/salud/derechos/nonsecure --build-arg AGENDA_URL=http://epsarpdllo01.suramericana.com/agenda/services --build-arg MONGODBNAME=SuraEnLineaDllo
+
+ms-ciente 
+docker image build -t ms-cliente:latest . --build-arg AUTORIZACIONES_PATH=/RestPAS/restApi/autorizaciones/nonsecure/digital/atencion --build-arg TIPO_DOCS_PATH=/RestPAS/restApi/autorizaciones/nonsecure/digital/atencion/documentos --build-arg TIPO_DOCS_URL=https://segdllo02.suranet.com --build-arg AUTORIZACIONES_URL=http://segdllo02.suranet.com/RestPAS/restApi/autorizaciones/nonsecure/digital/atencion --build-arg AGENDA_PATH=/agenda/services --build-arg POLIZA_DIG_URL=http://segdllo02.suranet.com/RestPAS/restApi/salud/derechos/nonsecure --build-arg POLIZA_DIG_PATH=/RestPAS/restApi/salud/derechos/nonsecure --build-arg AGENDA_URL=http://epsarpdllo01.suramericana.com/agenda/services --build-arg MONGODBNAME=SuraEnLineaDllo
+
+[WARNING]: Empty continuation line found in:
+    ENV MONGODBURI=${MONGODBURI}        MONGODBNAME=${MONGODBNAME}      AUTORIZACIONES_PATH=${AUTORIZACIONES_PATH}      AUTORIZACIONES_URL=${AUTORIZACIONES_URL}        TIPO_DOCS_PATH=${TIPO_DOCS_PATH}        TIPO_DOCS_URL=${TIPO_DOCS_URL}  AGENDA_PATH=${AGENDA_PATH}      AGENDA_URL=${AGENDA_URL}        POLIZA_DIG_PATH=${POLIZA_DIG_PATH}      POLIZA_DIG_URL=${POLIZA_DIG_URL}
+[WARNING]: Empty continuation lines will become errors in a future release.
+
+MONGODBURI=${MONGODBURI} \
+	AUTORIZACIONES_PATH=${AUTORIZACIONES_PATH} \
+	AUTORIZACIONES_URL=${AUTORIZACIONES_URL} \
+	TIPO_DOCS_PATH=${TIPO_DOCS_PATH} \
+	TIPO_DOCS_URL=${TIPO_DOCS_URL} \	
+	AGENDA_PATH=${AGENDA_PATH} \
+	AGENDA_URL=${AGENDA_URL} \	
+	POLIZA_DIG_PATH=${POLIZA_DIG_PATH} \
+	POLIZA_DIG_URL=${POLIZA_DIG_URL} \
+	
+	
+:::::::::::::::::::::
+
+copia del lo que había antes
+ARG MONGODBNAME
+ARG AUTORIZACIONES_PATH
+ARG AUTORIZACIONES_URL
+ARG TIPO_DOCS_PATH
+ARG TIPO_DOCS_URL
+ARG AGENDA_PATH
+ARG AGENDA_URL
+ARG POLIZA_DIG_PATH
+ARG POLIZA_DIG_URL
+	
+ENV MONGODBURI='mongodb://A7SO6S68E4ISEL:Su.r4.3n.l1.n3.4.06.27.20.14o@cluster0-shard-00-01-pcnre.mongodb.net:27017,cluster0-shard-00-00-pcnre.mongodb.net:27017,cluster0-shard-00-02-pcnre.mongodb.net:27017/test?ssl=true&nbChannelsPerNode=1&keepAlive=false&authSource=admin'\
+	MONGODBNAME=${MONGODBNAME} \
+	AUTORIZACIONES_PATH=${AUTORIZACIONES_PATH} \
+	AUTORIZACIONES_URL=${AUTORIZACIONES_URL} \
+	TIPO_DOCS_PATH=${TIPO_DOCS_PATH} \
+	TIPO_DOCS_URL=${TIPO_DOCS_URL} \	
+	AGENDA_PATH=${AGENDA_PATH} \
+	AGENDA_URL=${AGENDA_URL} \	
+	POLIZA_DIG_PATH=${POLIZA_DIG_PATH} \
+	POLIZA_DIG_URL=${POLIZA_DIG_URL}
+
+:::::::::::::::::::
+
+run the image
+docker container run java-example1:latest ==> ojo este comando no lo expone en el local 
+Para exponerlo en el local sería (note el -p 8080:8080):
+docker container run -p 8080:8080 ms-cliente:latest
+
+::::::::Para ver las variables de entorno ojo es por container:::::::::::
+docker exec ecc24e5bb930 env
+
+eliminar en cascada el container y la imagen 
+docker container stop 2f22a9b46aac \& docker container rm 2f22a9b46aac \& docker image rm ms-cliente
+
+:::ver los logs en tiempo real:::::::
+docker logs -f <CONTAINER>
+
+

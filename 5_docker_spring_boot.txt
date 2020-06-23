@@ -1,0 +1,16 @@
+https://spring.io/guides/topicals/spring-boot-docker/
+
+https://mkyong.com/docker/docker-spring-boot-examples/
+
+
+:::::::::::DOCKER AND DOCKER-COMPOSE::::::::::::::::::::::
+
+docker manages single containers
+
+docker-compose manages multiple container applications
+
+Usage of docker-compose requires 3 steps:
+
+Define the app environment with a Dockerfile
+Define the app services in docker-compose.yml
+Run docker-compose up to start and run app
